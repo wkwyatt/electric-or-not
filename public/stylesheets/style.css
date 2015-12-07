@@ -6,3 +6,33 @@ body {
 a {
   color: #00B7FF;
 }
+
+.car-image {
+	position: relative;
+	width: 50%;
+	text-align: center;
+	margin: auto;
+}
+
+.image-container {
+	position: relative;
+	width: 350px;
+	margin: auto;
+	padding: 50px;
+}
+
+.image-container img {
+	max-width: 100%;
+	border-radius: 15px;
+	margin: auto;
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+.circle-bg {
+   height: auto;
+   background: #ddd; 
+   -moz-border-radius: 70px; 
+   -webkit-border-radius: 70px; 
+   border-radius: 70px;
+}

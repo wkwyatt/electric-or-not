@@ -4,12 +4,21 @@
 <header>
 	<% include header %>
 </header>
-<%
-	for(i=0;i<photos.length; i++) {
-		%>
-		<h1><img src="<%= photos[i].name %>"></h1>
-		<%
-	}
-%>
+
+
+<div id="" class="car-image circle-bg">
+	<div class="image-container">
+	<%
+		var randNum = Math.floor(Math.random() * shoes.length);
+	%>
+		<img src="<%= shoes[randNum].image %>">
+		<h2><%= shoes[randNum].name %></h2>
+		<button class="btn btn-primary">Like</button>
+	</div>
+</div>
+
 </body>
 <% include footer %>
+
+
+
