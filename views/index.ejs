@@ -1,0 +1,15 @@
+<% include head %>
+
+<body>
+<header>
+	<% include header %>
+</header>
+<%
+	for(i=0;i<photos.length; i++) {
+		%>
+		<h1><img src="<%= photos[i].name %>"></h1>
+		<%
+	}
+%>
+</body>
+<% include footer %>
