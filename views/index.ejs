@@ -8,12 +8,14 @@
 
 <div id="" class="car-image circle-bg">
 	<div class="image-container">
-	<%
-		var randNum = Math.floor(Math.random() * shoes.length);
-	%>
-		<img src="<%= shoes[randNum].image %>">
-		<h2><%= shoes[randNum].name %></h2>
-		<button class="btn btn-primary">Like</button>
+		<img src="<%= shoe.image %>">
+		<h2><%= shoe.name %></h2>
+		<form>
+			<button class="btn btn-primary">Like</button>
+		</form>
+		<form>
+			<button class="btn btn-primary">Like</button>
+		</form>
 	</div>
 </div>
 

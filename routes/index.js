@@ -8,8 +8,8 @@ router.get('/', function(req, res, next) {
 		db.collection('shoes').find().toArray(function(error, result) {
 			console.log(result);
 			shoesArray = result;
-			console.log("flag: inside db array");  
-			res.render('index', { shoes: shoesArray });
+			var randNum = Math.floor(Math.random() * result.length);
+			res.render('index', { shoe: result[randNum] });
 		});
 	});
 	console.log("flag: inside main route");
