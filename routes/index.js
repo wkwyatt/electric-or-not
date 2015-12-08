@@ -5,27 +5,25 @@ var shoesArray = [];
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	MongoClient.connect('mongodb://localhost:27017/test', function(error, db) {
-		db.collection('users').find({ ip : req.ip }, { image: 1 }).toArray(function(error, userResult) {
-			db.collection('shoes').find().toArray(function(error, shoeResult) {
-				console.log("=========SHOE RESULTS==========");
-				console.log(shoeResult);
-				console.log("=========USER RESULTS==========");
-				console.log(userResult);
-				shoesArray = [];
-				console.log(shoeResult.length);
-				console.log(userResult.length);
-				for (i=0;i<userResult.length;i++) {
-					if (shoeResult.indexOf(userResult[i].image) < 0) {
-						shoesArray.push(shoeResult[i]);
-					}
+		db.collection('users').find({ ip : req.ip }).toArray(function(error, userResult) {
+
+			var votedPhotos = [];
+			for (i=0;i<userResult.length;i++) {
+				votedPhotos.push(userResult[i].image);
+			} 
+
+			db.collection('shoes').find({image: {$nin: votedPhotos}}).toArray(function(error, shoeResult) {
+				shoesArray = shoeResult;
+				if (shoesArray.length == 0) {
+					shoesArray.push(shoeResult[i]);
+					res.render('thanks');
+				} else {
+					var randNum = Math.floor(Math.random() * shoeResult.length);
+					res.render('index', { shoe: shoeResult[randNum] } );
 				}
-				console.log("=========FINAL SHOE ARRAY==========");
-				console.log(shoesArray);
-				var randNum = Math.floor(Math.random() * shoesArray.length);
-				res.render('index', { shoe: shoesArray[randNum] });
+				
 			});
 		});
-
 	});
 	console.log("flag: inside main route");
 	// index page should load a random picture/item
@@ -42,26 +40,41 @@ router.get('/', function(req, res, next) {
 
 });
 console.log("flag: main thread");
+
 router.get('/standings', function(req, res, next) {
 	console.log("flag: inside standing route");
-	// 1. Get all the standings 
-	// 2. Sort by highest likes
-	// 3. res.render the standings view and pass it the sorted photo array
-	res.render('index', {title: 'Standings'});
+	MongoClient.connect('mongodb://localhost:27017/test', function(error, db) {
+
+		db.collection('users').find({ ip : req.ip, vote: 'Dope'}).toArray(function(error, dopeResult) {
+			console.log(dopeResult);
+			dopeArray = dopeResult
+		
+			db.collection('users').find({ ip : req.ip, vote: 'Trash'}).toArray(function(error, trashResult) {
+				console.log(trashResult);
+				trashArray = trashResult;
+				res.render('standings', {title: 'Standings', dopeShoes: dopeArray, trashShoes: trashArray});
+			});
+		});
+		// 1. Get all the standings 
+		// 2. Sort by highest likes
+		// 3. res.render the standings view and pass it the sorted photo array
+	});
 });
 
 router.get('/likes', function(req,res,next) {
-	res.render('index', { shoe: 'Shoes' })
+	console.log("flag: inside likes route");
+	res.render('index', { shoe: 'Shoes' });
 });
 
 router.post('*', function(req,res,next) {
 	//this will run for all posted pages
-	var vote = req.body.vote;
+	console.log("flag: inside post route");
 	MongoClient.connect('mongodb://localhost:27017/test', function(error, db) {
 		db.collection('users').insertOne( {
 			ip: req.ip,
-			vote: vote,
-			image: req.body.shoe
+			vote: req.body.vote,
+			name: req.body.shoeName,
+			image: req.body.shoeImage
 		});
 		res.redirect('/');
 	});

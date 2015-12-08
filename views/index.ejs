@@ -9,15 +9,18 @@
 <div id="" class="car-image circle-bg">
 	<div class="image-container">
 		<img src="<%= shoe.image %>">
+
 		<h2><%= shoe.name %></h2>
 		<div class="button-wrapper">
 			<form class="vote-button" action="./trash" method="post">
-				<input type="hidden" name="shoe" value="<%= shoe.image %>" />
-				<input type="submit" class="btn btn-danger" value="Trash" />
+				<input type="hidden" name="shoeImage" value="<%= shoe.image %>" />
+				<input type="hidden" name="shoeName" value="<%= shoe.name %>" />
+				<input type="submit" class="btn btn-danger" name="vote" value="Trash" />
 			</form>
 			<form class="vote-button" action="./dope" method="post">
-				<input type="hidden" name="shoe" value="<%= shoe.image %>" />
-				<input type="submit" class="btn btn-primary" value="Dope" />
+				<input type="hidden" name="shoeImage" value="<%= shoe.image %>" />
+				<input type="hidden" name="shoeName" value="<%= shoe.name %>" />
+				<input type="submit" class="btn btn-primary" name="vote" value="Dope" />
 			</form>
 		</div>
 	</div>

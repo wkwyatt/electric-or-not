@@ -44,3 +44,21 @@ a {
 .vote-button input {
 	display: inline-block;
 }
+
+#standings {
+	padding: 75px;
+}
+
+.voted-shoes {
+	display: block;
+	margin-bottom: 40px;
+}
+
+.voted-shoes h4 {
+	display: inline-block;
+}
+
+.voted-shoes img {
+	display: inline-block;
+	margin-right: 50px;
+}

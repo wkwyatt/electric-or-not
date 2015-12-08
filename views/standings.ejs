@@ -1,12 +1,22 @@
 <% include head %>
 
-<body>
+<body ng-controller="standingsCntrl">
 <header>
 	<% include header %>
 </header>
 
-
-<div id="" class="circle-bg">
+<h1><%= title %></h1>
+<div id="standings" class="circle-bg">
+	<h2>Dope Kicks</h2>
+	<div class="voted-shoes" ng-repeat="shoe in dopeShoes">
+		<img src="{{shoe.image}}" >
+		<h4>{{shoe.name}}</h4>
+	</div>
+	<h2>Trash Kicks</h2>
+	<div class="voted-shoes" ng-repeat="shoe in trashShoes">
+		<img src="images/error.jpeg" >
+		<h4>{{shoe.name}}</h4>
+	</div>
 </div>
 
 <% include footer %>
