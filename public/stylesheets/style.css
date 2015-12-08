@@ -36,3 +36,11 @@ a {
    -webkit-border-radius: 70px; 
    border-radius: 70px;
 }
+
+.vote-button {
+	display: inline-block;
+	padding: 0 15px;
+}
+.vote-button input {
+	display: inline-block;
+}

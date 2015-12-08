@@ -10,12 +10,16 @@
 	<div class="image-container">
 		<img src="<%= shoe.image %>">
 		<h2><%= shoe.name %></h2>
-		<form>
-			<button class="btn btn-primary">Like</button>
-		</form>
-		<form>
-			<button class="btn btn-primary">Like</button>
-		</form>
+		<div class="button-wrapper">
+			<form class="vote-button" action="./trash" method="post">
+				<input type="hidden" name="shoe" value="<%= shoe.image %>" />
+				<input type="submit" class="btn btn-danger" value="Trash" />
+			</form>
+			<form class="vote-button" action="./dope" method="post">
+				<input type="hidden" name="shoe" value="<%= shoe.image %>" />
+				<input type="submit" class="btn btn-primary" value="Dope" />
+			</form>
+		</div>
 	</div>
 </div>
 

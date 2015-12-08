@@ -5,12 +5,27 @@ var shoesArray = [];
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	MongoClient.connect('mongodb://localhost:27017/test', function(error, db) {
-		db.collection('shoes').find().toArray(function(error, result) {
-			console.log(result);
-			shoesArray = result;
-			var randNum = Math.floor(Math.random() * result.length);
-			res.render('index', { shoe: result[randNum] });
+		db.collection('users').find({ ip : req.ip }, { image: 1 }).toArray(function(error, userResult) {
+			db.collection('shoes').find().toArray(function(error, shoeResult) {
+				console.log("=========SHOE RESULTS==========");
+				console.log(shoeResult);
+				console.log("=========USER RESULTS==========");
+				console.log(userResult);
+				shoesArray = [];
+				console.log(shoeResult.length);
+				console.log(userResult.length);
+				for (i=0;i<userResult.length;i++) {
+					if (shoeResult.indexOf(userResult[i].image) < 0) {
+						shoesArray.push(shoeResult[i]);
+					}
+				}
+				console.log("=========FINAL SHOE ARRAY==========");
+				console.log(shoesArray);
+				var randNum = Math.floor(Math.random() * shoesArray.length);
+				res.render('index', { shoe: shoesArray[randNum] });
+			});
 		});
+
 	});
 	console.log("flag: inside main route");
 	// index page should load a random picture/item
@@ -35,8 +50,21 @@ router.get('/standings', function(req, res, next) {
 	res.render('index', {title: 'Standings'});
 });
 
+router.get('/likes', function(req,res,next) {
+	res.render('index', { shoe: 'Shoes' })
+});
+
 router.post('*', function(req,res,next) {
 	//this will run for all posted pages
+	var vote = req.body.vote;
+	MongoClient.connect('mongodb://localhost:27017/test', function(error, db) {
+		db.collection('users').insertOne( {
+			ip: req.ip,
+			vote: vote,
+			image: req.body.shoe
+		});
+		res.redirect('/');
+	});
 });
 
 module.exports = router;
