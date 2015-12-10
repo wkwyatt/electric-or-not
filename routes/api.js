@@ -4,7 +4,7 @@ var MongoClient = require("mongodb").MongoClient;
 var shoesArray = [];
 /* GET home page. */
 var db;
-var mongoURl = 'mongodb://localhost:27017/test'
+var mongoUrl = 'mongodb://localhost:27017/test'
 var mongoose = require('mongoose');
 mongoose.connect(mongoUrl)
 var Shoes = require('../models/shoes')
