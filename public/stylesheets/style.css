@@ -7,6 +7,25 @@ a {
   color: #00B7FF;
 }
 
+h1 {
+	text-align: center;
+}
+
+#standings {
+	width: 65%;
+	padding: 35px 15px;
+	display: inline-block;
+}
+
+#standings img {
+	display: inline-block;
+	margin-right: 50px;
+}
+
+#standings * {
+	display: inline-block;
+}
+
 .car-image {
 	position: relative;
 	width: 50%;
@@ -45,20 +64,42 @@ a {
 	display: inline-block;
 }
 
-#standings {
-	padding: 75px;
+#user-votes {
+	padding: 75px;	
+	width: 25%;
+	float: right;
 }
 
 .voted-shoes {
 	display: block;
 	margin-bottom: 40px;
+	float: left;
+}
+
+.voted-shoes .voted-shoes-img {
+	display: inline-block;
+	margin-right: 50px;
+	width: 150px;
 }
 
 .voted-shoes h4 {
 	display: inline-block;
 }
 
+#user-votes h3 {
+	color: #2234df;
+}
+
+#footer {
+	position: relative;
+	bottom: 40px;
+}
+
+#add-shoe-btn {
+	margin: auto;
+}
+
 .voted-shoes img {
 	display: inline-block;
-	margin-right: 50px;
+	width: 100%;
 }

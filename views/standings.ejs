@@ -1,22 +1,65 @@
 <% include head %>
+<% 
+	// console.log('JSondata');
+	// console.log(JSON.stringify(data));
+	// var localData = JSON.stringify(data);
+%>
 
-<body ng-controller="standingsCntrl">
+<body>
 <header>
 	<% include header %>
 </header>
 
 <h1><%= title %></h1>
+
 <div id="standings" class="circle-bg">
-	<h2>Dope Kicks</h2>
-	<div class="voted-shoes" ng-repeat="shoe in dopeShoes">
-		<img src="{{shoe.image}}" >
-		<h4>{{shoe.name}}</h4>
+<form action="./addShoe" method="post">
+	<input id="add-shoe-btn" class="btn btn-primary" type="button" value="Add Shoe to List" name="newShoe">
+</form>
+	<ul >
+
+		<!-- for loop -->
+		<% for(i=0; i<shoeStandings.length; i++){ %>
+			<li>
+				<img width="200" src="<%= shoeStandings[i].image %>" alt="" />
+				<h4 class="up"><%= shoeStandings[i].name %></h4><br />
+				<p>Votes: <%= shoeStandings[i].likes %></p>
+			</li>
+		<% } %>
+		<!-- end for loop -->
+
+	</ul>
+</div>
+
+<div id="user-votes" class="circle-bg">
+	<h3>Your Dope Kicks</h3>
+	<%
+		for (var i = 0; i < dopeArray.length; i++) {
+	%>
+	<div class="voted-shoes">
+		<div class="voted-shoes-img">
+			<img src="<%= dopeArray[i].image %>" >
+		</div>
+		<h4><%= dopeArray[i].name %></h4>
 	</div>
-	<h2>Trash Kicks</h2>
-	<div class="voted-shoes" ng-repeat="shoe in trashShoes">
-		<img src="images/error.jpeg" >
-		<h4>{{shoe.name}}</h4>
+	<%
+		}
+	%>
+
+
+	<h3>Your Trash Kicks</h3>
+	<%
+		for (var i = 0; i < trashArray.length; i++) {
+	%>
+	<div class="voted-shoes">
+		<div class="voted-shoes-img">
+			<img src="<%= trashArray[i].image %>" >
+		</div>
+		<h4><%= trashArray[i].name %></h4>
 	</div>
+	<%
+		}
+	%>
 </div>
 
 <% include footer %>
