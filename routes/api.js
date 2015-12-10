@@ -37,6 +37,25 @@ router.post('/shoes/post',function(req, res, post) {
 	})
 })
 
+
+router.put('/shoes/update', function(req, res, next) {
+	Shoe.findById(req.params.photo_id, function(err, shoeResult) {
+		if(err) {
+			console.log(err);
+		} else {
+			shoeResult.image = req.params.shoeImage;
+			shoeResult.name = req.params.shoeName;
+			shoeResult.save(function(err) {
+				if(err) {
+					console.log(err);
+				} else {
+					res.json({message: 'Shoe was updated'})
+				}
+			})
+		}
+	});
+});
+
 router.delete('/shoes/delete', function(req, res, next) {
 	Shoe.remove({
 		_id: req.params.photo_id
