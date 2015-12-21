@@ -75,7 +75,7 @@ router.get('/likes', function(req,res,next) {
 	res.render('index', { shoe: 'Shoes' });
 });
 
-router.post('/newshoes', function(req,res,next) {
+router.post('*', function(req,res,next) {
 	//this will run for all posted pages
 	if (req.url == "/standings") {
 		var page = "standings";

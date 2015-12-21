@@ -10,6 +10,13 @@ var apiRoutes = require('./routes/api');
 // var standingsRoute = require('./routes/standings')
 var users = require('./routes/users');
 
+
+var mongoUrl = 
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOLAB_URL ||
+  'mongodb://localhost:27017/test';
+mongoose.connect(mongoUrl);
+
 var app = express();
 
 // view engine setup
